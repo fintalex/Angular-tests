@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container" ng-app="app" ng-controller="BeerCtrl">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <p>{{model | json}}</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Colour</th>
+            <th>Tasted</th>
+            <th></th>
+        </tr>
+
+        <tr ng-repeat="beer in model.Beers">
+            <td>{{beer.Name}}</td>
+            <td>{{beer.Colour}}</td>
+            <td>
+                <div class="checkbox">
+                    <input type="checkbox" disabled="disabled" ng-model="beer.HasTried" /> Have Tasted
+                </div>
+            </td>
+            <td><a href="@Url.Action("Delete", "Beer")/?id={{beer.Id}}"><i class="fa fa-trash-o"></i></a></td>
+        </tr>
+       
+        <tr ng-if="model.Beers.length == 0">
+            <td colspan="4" class="text-center">There are no beers to display</td>
+        </tr>
+
+    </table>
+
+
+    <a href="@Url.Action("Edit", "Beer")" class="btn btn-primary">Add Beer</a>
+</div>
