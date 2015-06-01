@@ -11,6 +11,8 @@
 		<script src="~/Scripts/bootstrap.min.js"></script>
 		<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 		<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+
+		<link href="~/Content/ladda.min.css" rel="stylesheet" />
     </head>
     <body>
         <header>
@@ -48,6 +50,13 @@
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/AngularCustom")
+
+		<script src="~/Scripts/Ladda/spin.js"></script>
+		<script src="~/Scripts/Ladda/ladda.js"></script>
+		<script src="~/Scripts/Ladda/ladda.jquery.js"></script>
+
         @RenderSection("scripts", required: false)
+
+		
     </body>
 </html>

@@ -16,7 +16,7 @@ namespace AngularDevSuperPower.EF
     public partial class AngularDemoContext : DbContext
     {
         public AngularDemoContext()
-            : base("name=AngularDemoContext")
+			: base("name=AngularDemoContextFromWork")
         {
         }
     

@@ -10,8 +10,7 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 
-    <p>{{model | json}}</p>
-    <table class="table table-stripped">
+    <table class="table table-striped">
         <tr>
             <th>Name</th>
             <th>Colour</th>
@@ -27,20 +26,32 @@
                     <input type="checkbox" disabled="disabled" ng-model="beer.HasTried" /> Have Tasted
                 </div>
             </td>
-            <td><a href="@Url.Action("Delete", "Beer")/?id={{beer.Id}}"><i class="fa fa-trash-o"></i></a></td>
+            <td><a href="@Url.Action("Delete", "Beer")/?id={{beer.Id}}"><i class="glyphicon glyphicon-trash"></i></a></td>
         </tr>
        
         <tr ng-if="model.Beers.length == 0">
             <td colspan="4" class="text-center">There are no beers to display</td>
         </tr>
 
-		<tr>
+		<tr ng-if="states.showBeerForm">
 			<td>
-				<input type="text" name="name" value=" " />
+				<input type="text" class="form-control" placeholder="Name" ng-model="new.Beer.Name" />
+			</td>
+			<td>
+				<input type="text" class="form-control" placeholder="Colour" ng-model="new.Beer.Colour" />
+			</td>
+			<td>
+				<div class="checkbox">
+					<input type="checkbox" ng-model="new.Beer.HasTried"/> Has Tested
+				</div>
+			</td>
+			<td>
+				<button type="button" class="btn btn-primary ladda-button" ng-click="addBeer()" loading-button data-style="expand-left" spin="states.isAdding"> Add </button>
+				<button type="button" class="btn btn-default" ng-click="showBeerForm(false)" > Cancel</button>
 			</td>
 		</tr>
     </table>
 
 
-    <a href="@Url.Action("Edit", "Beer")" class="btn btn-primary">Add Beer</a>
+    <a ng-click="showBeerForm(true)" class="btn btn-primary">Add Beer</a>
 </div>

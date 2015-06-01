@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AngularDevSuperPower.EF;
 using AngularDevSuperPower.Models;
+using System.Threading;
 
 namespace AngularDevSuperPower.Controllers
 {
@@ -20,12 +21,12 @@ namespace AngularDevSuperPower.Controllers
             var model = new BeerIndexVM();
             using (var db = new AngularDemoContext())
             {
-                //model.Beers = db.Beer.ToList();
-				model.Beers = new List<Beer>() { 
-					new Beer(){Id=1, Name="Эль", Colour="светлое", HasTried=true},
-					new Beer(){Id=2, Name="Имбирное", Colour="темное", HasTried=false},
-					new Beer(){Id=4, Name="Медовуха", Colour="красное", HasTried=true},
-				};
+                model.Beers = db.Beer.ToList();
+				//model.Beers = new List<Beer>() { 
+				//	new Beer(){Id=1, Name="Эль", Colour="светлое", HasTried=true},
+				//	new Beer(){Id=2, Name="Имбирное", Colour="темное", HasTried=false},
+				//	new Beer(){Id=4, Name="Медовуха", Colour="красное", HasTried=true},
+				//};
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -47,6 +48,7 @@ namespace AngularDevSuperPower.Controllers
 
         public ActionResult Edit (BeerEditVM model)
         {
+			Thread.Sleep(2000);
             if (ModelState.IsValid)
             {
                 using (var db = new AngularDemoContext())
@@ -61,7 +63,7 @@ namespace AngularDevSuperPower.Controllers
                     db.Beer.Add(beer);
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Beer");
+                    return Json(beer, JsonRequestBehavior.AllowGet);
                 }
             }
             throw new HttpException(400, "error");
