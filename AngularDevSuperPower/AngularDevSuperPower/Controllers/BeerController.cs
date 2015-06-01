@@ -20,7 +20,12 @@ namespace AngularDevSuperPower.Controllers
             var model = new BeerIndexVM();
             using (var db = new AngularDemoContext())
             {
-                model.Beers = db.Beer.ToList();
+                //model.Beers = db.Beer.ToList();
+				model.Beers = new List<Beer>() { 
+					new Beer(){Id=1, Name="Эль", Colour="светлое", HasTried=true},
+					new Beer(){Id=2, Name="Имбирное", Colour="темное", HasTried=false},
+					new Beer(){Id=4, Name="Медовуха", Colour="красное", HasTried=true},
+				};
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
